@@ -13,6 +13,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import axios from "axios";
 
   const Controlado = () => {
     const [title, setTitle] = useState('Todo 01')
@@ -45,17 +46,19 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
       e.preventDefault();
       
     };
+
     const getPacientesBtn = async () => {
       const response = await axios.get("http://localhost:3080/v1/pacientes");
       const data = response.data.recordset.map((row, index) => {
         
         return {
-          IdPaciente: index,
+          IdPaciente: row.IdPaciente,
           Paterno: row.Paterno,
           Materno: row.Materno,
           Nombre: row.Nombre
         };
       });
+      console.log(data);
       setRows(data);
     };
   

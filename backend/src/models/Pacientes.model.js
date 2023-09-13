@@ -17,7 +17,7 @@ const CONNECTION_STRING =
 async function getPacientes() {
   try {
     const pool = await sql.connect(CONNECTION_STRING);
-    const result = await pool.query("select * from pacientes;");
+    const result = await pool.query("select top 1200 * from pacientes;");
     return result;
   } catch (error) {
     console.error(error);
